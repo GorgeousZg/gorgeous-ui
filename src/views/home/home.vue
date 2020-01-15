@@ -3,17 +3,12 @@
     <el-container>
       <el-header class="homeHeader">Header</el-header>
       <el-container>
-        <el-aside style="background-color: #545c64">
+        <el-aside style="background-color: #545c64;width: 208px;">
           <el-col :span="12">
             <el-menu
-                    router
-                    default-active="2"
-                    class="el-menu-vertical-demo"
-                    @open="handleOpen"
-                    @close="handleClose"
-                    background-color="#545c64"
-                    text-color="#fff"
-                    active-text-color="#ffd04b">
+            background-color="#545c64"
+            text-color="#fff"
+            @select="menuClick">
               <el-submenu index="1">
                 <template slot="title">
                   <i class="el-icon-location"></i>
@@ -21,31 +16,32 @@
                 </template>
                 <el-menu-item-group>
                   <template slot="title">分组一</template>
-                  <el-menu-item index="1-1">树状磁盘</el-menu-item>
+                  <el-menu-item index="/mydisk">树状磁盘</el-menu-item>
                   <el-menu-item index="1-2">选项2</el-menu-item>
                 </el-menu-item-group>
               </el-submenu>
             </el-menu>
           </el-col>
         </el-aside>
-        <el-main><router-view/>></el-main>
+        <el-main>
+          <router-view/>
+          </el-main>
       </el-container>
     </el-container>
   </div>
 </template>
 
 <script>
+import { log } from 'util';
 // @ is an alias to /src
 export default {
   name: 'home',
   components: {
   },
   methods: {
-    handleOpen(key, keyPath) {
-      console.log(key, keyPath);
-    },
-    handleClose(key, keyPath) {
-      console.log(key, keyPath);
+    menuClick(index,indexPath){
+      console.log(index,indexPath);
+      this.$router.push(index);
     }
   }
 }
